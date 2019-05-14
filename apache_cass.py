@@ -70,3 +70,6 @@ try:
            rows = session.execute(query)
   except Exception as e: 
            print(e)
+
+  session.shutdown()
+           cluster.shutdown()
