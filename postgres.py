@@ -6,7 +6,7 @@ try:
 except psycopg2.Error as e:
   print("Error: Could not make connection to the Pstgres database")
   print(e)
-  
+
 # Getting a cursor
 try:
   cur = conn.cursor()
@@ -31,15 +31,16 @@ try:
 except psycopg2.Error as e:
   print("Error: Could not make connection to the Postgres dabase")
   print(e)
-  
-  
+
+
 cur.execute("select * from test")
 
-           
-try:                
+
+try:
   cur.execute("CREATE TABLE test (col1 int, col2 int, col3 int);")
 except: psycopg2.Error as e:
   print("Error: Issue creating table")
   print(e)
 
 varchar
+test
