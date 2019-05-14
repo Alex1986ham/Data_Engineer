@@ -42,5 +42,4 @@ except: psycopg2.Error as e:
   print("Error: Issue creating table")
   print(e)
 
-try:
-                cur.execute("INSERT INTO 
+varchar
