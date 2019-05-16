@@ -18,7 +18,7 @@ conn.set_session(autocomit=True)
 
 try;
   cur.execute("create database orders")
-except psycopg2(Error as e:
+except psycopg2.Error as e:
   print(e)
 
 try:
