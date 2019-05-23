@@ -23,30 +23,8 @@ except Error as e:
 conn.autocommit=True
 
 
-# Create TABLE
 try:
-    cur.execute("CREATE TABLE IF NOT EXISTS music_libary(album_id int(10) NOT NULL, album_name varchar(20) NULL, artist_name varchar(20) NULL, year int(5) NULL, songs text(30) NULL)")
-    print("3. table created")
-except Error as e:
-    print("Error: Issue creating table")
-    print(e)
-
-
-# Insert INTO
-try:
-    cur.execute("INSERT INTO music_libary (album_id, album_name, artist_name, year, songs) \
-                VALUES (%s, %s, %s, %s, %s)", \
-                (1, "Rubber Soul", "The Beatles", 1965, "Let it be"))
-    print("4. inserted")
-except Error as e:
-    print("Error: Inserting rows")
-    print(e)
-
-
-
-# confirm the data got inserted
-try:
-    cur.execute("SELECT album_id, album_name FROM music_libary;")
+    cur.execute("SELECT * FROM music_libary;")
 except Error as e:
     print("Error: select *")
     print(e)
