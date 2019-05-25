@@ -58,3 +58,5 @@ for rows in row:
 #while row:
 #    print(row)
     #row = cur.fetchone
+
+conn.close()

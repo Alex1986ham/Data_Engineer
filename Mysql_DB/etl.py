@@ -1,6 +1,8 @@
+import os
+import glob
+import mysql
+import pandas as pd
 
-import mysql.connector
-from mysql.connector import Error
 
 try:
     conn = mysql.connector.connect(host='192.168.178.22',
@@ -12,7 +14,6 @@ except Error as e:
     print("Error while connection to mysql", e)
 
 
-
 try:
     cur = conn.cursor()
     print("2. cursor ok")
@@ -22,19 +23,13 @@ except Error as e:
 
 conn.autocommit=True
 
+"""
+def get_files(filepath):
+    all_files = []
+    for root, dirs, files in os.walk(filepath):
+        files = glob.glob(os.path.join(root, '*.json'))
+        for f in files :
+            all_files.append(os.path.abspath(f))
 
-try:
-    cur.execute("SELECT * FROM music_libary;")
-except Error as e:
-    print("Error: select *")
-    print(e)
-
-row = cur.fetchone()
-for rows in row:
-    print(row)
-    #row = cur.fetchone()
-#while row:
-#    print(row)
-    #row = cur.fetchone
-
-conn.close()
+    return all_files
+"""
