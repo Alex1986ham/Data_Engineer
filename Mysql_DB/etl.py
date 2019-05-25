@@ -33,3 +33,4 @@ def get_files(filepath):
 
     return all_files
 """
+conn.close()
