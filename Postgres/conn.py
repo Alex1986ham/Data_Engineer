@@ -1,7 +1,7 @@
 import psycopg2
 
 try:
-    conn = psycopg2.connect("host=192.168.178.22 dbname=test user=postgres password=Dudko010914")
+    conn = psycopg2.connect("host=127.0.0.1 dbname=test user=postgres password=Dudko$010914")
     print("1. works")
 except psycopg2.Error as e:
     print("Error")
@@ -42,6 +42,8 @@ try:
 except psycopg2.Error as e:
     print("error")
     print(e)
+
+
 
 # Creating dimension TABLE
 try:
@@ -132,7 +134,11 @@ try:
 except psycopg2.Error as e:
     print("Error")
     print(e)
-"""
+
 # Close cursor and connection
+
+"""
+
+
 cur.close()
 conn.close()
