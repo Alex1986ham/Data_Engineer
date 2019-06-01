@@ -27,7 +27,11 @@ function global:deactivate ([switch]$NonDestructive) {
 
 deactivate -nondestructive
 
+<<<<<<< HEAD
 $env:VIRTUAL_ENV="C:\Users\D&D\Udacity\Data_Engineer\Data_Engineer\env"
+=======
+$env:VIRTUAL_ENV="C:\Users\aldudko\Udacity\Data_Engineer\env"
+>>>>>>> c092a5fcb03393387652f96a2f327b46856b1748
 
 if (! $env:VIRTUAL_ENV_DISABLE_PROMPT) {
     # Set the prompt to include the env name
