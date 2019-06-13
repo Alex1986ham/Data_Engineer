@@ -1,4 +1,7 @@
 import psycopg2
+from flask import Flask, render_template, json, request
+
+app = Flask(__name__)
 
 try:
     conn = psycopg2.connect("host=127.0.0.1 dbname=test user=postgres password=Dudko$010914")
@@ -16,6 +19,65 @@ except psycopg2.Error as e:
 
 conn.set_session(autocommit=True)
 
+try:
+    cur.execute("CREATE TABLE IF NOT EXISTS name_form (id serial, vorname text, nachname text, alter int, mw boolean);")
+except psycopg2.Error as e:
+    print("Error")
+    print(e)
+
+
+
+
+@app.route('/', methods=['GET'])
+def main():
+    try:
+        cur.execute("SELECT * FROM name_form;")
+    except psycopg2.Error as e:
+        print("Error: select *")
+        print(e)
+
+    row = cur.fetchall  ()
+    return render_template('index.html', row=row)
+
+
+
+@app.route('/', methods=['GET', 'POST'])
+def my_form_post():
+    vorname = request.form['vorname']
+    nachname = request.form['nachname']
+    alter = request.form['alter']
+    mw = request.form['mw']
+
+    cur.execute("INSERT INTO name_form (vorname, nachname, alter, mw) \
+    VALUES (%s, %s, %s, %s)", \
+    (vorname, nachname, alter, mw))
+
+    #vorname = Vorname
+    #nachname = nachname
+    #alter = alter
+    return render_template('index.html', vorname=vorname, nachname=nachname, alter=alter )
+
+
+"""
+    try:
+        _customer_id = request.form['customer_id']
+
+        cur.execute("INSERT INTO customer (customer_id, name, rewards) \
+        VALUES (%s, %s, %s)", \
+        (_customer_id, 'testname', True))
+    except psycopg2.Error as e:
+        print("error")
+        print(e)
+
+    return render_template('index.html', row=row)
+
+
+
+
+
+#while row:
+#    print(row)
+#    row = cur.fetchone
 
 
 # Creating the fact table
@@ -109,7 +171,8 @@ except psycopg2.Error as e:
     print("Error")
     print(e)
 
-"""
+
+
 # Query 1:
 try:
     cur.execute("SELECT name, item_name, rewards FROM ((customer_transactions \
@@ -137,8 +200,12 @@ except psycopg2.Error as e:
 
 # Close cursor and connection
 
+
+
 """
 
+#cur.close()
+#conn.close()
 
-cur.close()
-conn.close()
+if __name__ == "__main__":
+    app.run(port=5002)

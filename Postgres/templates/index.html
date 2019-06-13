@@ -1,0 +1,33 @@
+<p> test</p>
+
+<body>
+    {% for rows in row %}
+      <p1>Hello, {{ row }}!</p1><br>
+    {% endfor %}
+
+
+
+      <form method="POST">
+          <input name="customer_id">
+          <input type="submit">
+      </form>
+
+
+      <form method="POST">
+        <fieldset>
+          <legend>Personal Information:</legend>
+          <label for="vorname" class="sr-only">Vorname</label>
+          <input name="vorname"><br>
+          <label for="nachname" class="sr-only">Nachname</label>
+          <input name="nachname"><br>
+          <label for="alter" class="sr-only">Alter</label>
+          <input name="alter"><br>
+          <label for="mw" class="sr-only">W/M</label>
+          <input name="mw"><br>
+          <input type="submit" value="OK">
+        </fieldset>
+      </form>
+
+    <p2>Information inserted: {{vorname, nachname, alter, }}
+
+</body>
