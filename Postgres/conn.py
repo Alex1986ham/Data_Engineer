@@ -65,9 +65,17 @@ def my_form_post():
     #data = cursor.fetchall()
     row = cur.fetchall()
 
-    return render_template('index.html', vorname=vorname, nachname=nachname, alter=alter, value=row)
+    idToDelete = request.form['delete_row']
 
+    try:
+        cur.execute("DELETE FROM name_form WHERE id = %s", (idToDelete))
+    except psycopg2.Error as e:
+        print("delte Error")
+        print(e)
 
+    return render_template('index.html', vorname=vorname, nachname=nachname, alter=alter, value=row, idToDelete=delete_row)
+
+"""
 @app.route('/', methods=['POST'])
 def deleteCategory(delete_row):
     categoryToDelete = session.query(name_form).filter_by(id=delete_row).one()
@@ -77,7 +85,7 @@ def deleteCategory(delete_row):
     else:
         return render_template('index.html', delte_row=delete_row)
 
-"""
+
     try:
         _customer_id = request.form['customer_id']
 
