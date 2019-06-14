@@ -6,6 +6,30 @@
     {% endfor %}
 
 
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>vorname</th>
+      <th>nachname</th>
+      <th>alter</th>
+      <th>mw</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for row in value %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 
       <form method="POST">
           <input name="customer_id">
@@ -26,6 +50,12 @@
           <input name="mw"><br>
           <input type="submit" value="OK">
         </fieldset>
+      </form>
+
+      <form method="POST">
+        <label for="delete_row" class="sr-only">Löschen</label>
+        <input name="delete_row">
+        <input type="submit" value="Löschen"
       </form>
 
     <p2>Information inserted: {{vorname, nachname, alter, }}

@@ -36,8 +36,9 @@ def main():
         print("Error: select *")
         print(e)
 
-    row = cur.fetchall  ()
-    return render_template('index.html', row=row)
+    #data = cursor.fetchall()
+    row = cur.fetchall()
+    return render_template('index.html', value=row)
 
 
 
@@ -55,8 +56,26 @@ def my_form_post():
     #vorname = Vorname
     #nachname = nachname
     #alter = alter
-    return render_template('index.html', vorname=vorname, nachname=nachname, alter=alter )
+    try:
+        cur.execute("SELECT * FROM name_form;")
+    except psycopg2.Error as e:
+        print("Error: select *")
+        print(e)
 
+    #data = cursor.fetchall()
+    row = cur.fetchall()
+
+    return render_template('index.html', vorname=vorname, nachname=nachname, alter=alter, value=row)
+
+
+@app.route('/', methods=['POST'])
+def deleteCategory(delete_row):
+    categoryToDelete = session.query(name_form).filter_by(id=delete_row).one()
+    if request.method == 'POST':
+        session.delete(categoryToDelete)
+        return redirect(url_for('index.html', delete_row=delete_row))
+    else:
+        return render_template('index.html', delte_row=delete_row)
 
 """
     try:
