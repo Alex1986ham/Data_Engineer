@@ -65,17 +65,49 @@ def my_form_post():
     #data = cursor.fetchall()
     row = cur.fetchall()
 
+def deleterow():
+    delete_row = request.form['delete_row']
+    cur.execute("DELETE FROM name_form WHERE id= %s", (delete_row))
+
+
     return render_template('index.html', vorname=vorname, nachname=nachname, alter=alter, value=row)
 
 
-@app.route('/', methods=['POST'])
-def deleteCategory(delete_row):
-    categoryToDelete = session.query(name_form).filter_by(id=delete_row).one()
+
+@app.route('/delete/<int:id>', methods=['GET', 'POST'])
+def delete(id):
+    qry = ("DELETE FROM name_form WHERE id = %s", (delete_row))
+
+    #if request.form['delete_row'] > 0:
+    cur.execute(qry)
+    return render_template('/')
+    #else:
+    #    return render_template('delete')
+
+
+"""
+
+@app.route('/delete', methods=['GET', 'POST'])
+def deleteCategory():
+    delete_row = session.query(Category).filter_by(id=category_id).one()
     if request.method == 'POST':
         session.delete(categoryToDelete)
-        return redirect(url_for('index.html', delete_row=delete_row))
+        session.commit()
+        session.close()
+        return redirect(url_for('showCategory', category_id=category_id))
     else:
-        return render_template('index.html', delte_row=delete_row)
+        return render_template('deleteCategory.html', category=categoryToDelete)
+"""
+
+
+"""
+@app.route('/<int:delete_row>/delete', methods=['GET', 'POST'])
+def deleterow(delete_renrow):
+    #delete_row = request.form['delete_row']
+    #delete_row = session.query(name_form).filter_by(id=delete_row).one()
+    cur.execute("DELETE FROM name_form WHERE id = %s", (delete_row))
+    return render_template('delete.html', delete_row=delete_row)
+"""
 
 """
     try:
