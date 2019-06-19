@@ -1,5 +1,5 @@
 import psycopg2
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, json, request, redirect, url_for, flash, jsonify
 
 app = Flask(__name__)
 
@@ -49,10 +49,14 @@ def my_form_post():
     alter = request.form['alter']
     mw = request.form['mw']
 
+    #delete_row = request.form['delete_row']
+
     cur.execute("INSERT INTO name_form (vorname, nachname, alter, mw) \
     VALUES (%s, %s, %s, %s)", \
     (vorname, nachname, alter, mw))
 
+    #print(delete_row)
+    # cur.execute("DELETE FROM name_form WHERE id= %s", (delete_row))
     #vorname = Vorname
     #nachname = nachname
     #alter = alter
@@ -65,14 +69,9 @@ def my_form_post():
     #data = cursor.fetchall()
     row = cur.fetchall()
 
-def deleterow():
-    delete_row = request.form['delete_row']
-    cur.execute("DELETE FROM name_form WHERE id= %s", (delete_row))
-
-
     return render_template('index.html', vorname=vorname, nachname=nachname, alter=alter, value=row)
 
-
+"""
 
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
@@ -83,21 +82,30 @@ def delete(id):
     return render_template('/')
     #else:
     #    return render_template('delete')
-
-
 """
+
+@app.route('/delete', methods=['GET'])
+def deleterow_show():
+    return render_template('delete.html')
+
 
 @app.route('/delete', methods=['GET', 'POST'])
-def deleteCategory():
-    delete_row = session.query(Category).filter_by(id=category_id).one()
-    if request.method == 'POST':
-        session.delete(categoryToDelete)
-        session.commit()
-        session.close()
-        return redirect(url_for('showCategory', category_id=category_id))
-    else:
-        return render_template('deleteCategory.html', category=categoryToDelete)
-"""
+def deleterow():
+    delete_row = request.form['delete_row']
+
+    cur.execute("DELETE FROM name_form WHERE id = %s", (delete_row))
+
+    try:
+        cur.execute("SELECT * FROM name_form;")
+    except psycopg2.Error as e:
+        print("Error: select *")
+        print(e)
+
+    #data = cursor.fetchall()
+    row = cur.fetchall()
+
+
+    return render_template('index.html', value=row)
 
 
 """

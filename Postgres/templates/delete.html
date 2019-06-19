@@ -1,26 +1,15 @@
-<h4>Delete row</h4>
+<body>
 
+  <h4>Delete row</h4>
 
+  <form method="POST">
+    <fieldset>
+      <label for="delete_row">Löschen</label>
+      <input name="delete_row">
+      <input type="submit" value="ok"
+    </fieldset>
+  </form>
 
-<form action="{{ url_for('deleterow', delete_row=delete_row)}}" method = 'post'>
-  <label for="delete_row" class="sr-only">Löschen</label>
-  <input name="delete_row">
-  <input type="submit" value="Löschen"
-</form>
+<p2>Information inserted: {{ delete_row }}
 
-
-
-
-<!--
-<form action="{{ url_for('deleteItem', category_id=item.category_id, items_id=item.id)}}" method = 'post'>
-
-	<button type="submit" class="btn btn-default delete" id="submit" type="submit">
-	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button>
-
-
-</form>
-<a href = '{{url_for('showItems', category_id=item.category_id, items_id=item.id)}}'>
-  <button class="btn btn-default delete">
-  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
-</a>
--->
+</body>
