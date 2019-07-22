@@ -1,6 +1,6 @@
 *Udacity Project 3: Creating AWS Redshift Data Warehouse*
 
-*Project Overview*
+**Project Overview**
 
 The main goal of this project is to create a data warehouse in the cloud on an AWS Redshift cluster for a music streaming service called Sparkify. The initial situation is that Sparkify wants to map both its song database and the data of its users completely in ETL processes in the cloud. The song and user data are stored in Amazon S3 memory, in directories with JSON logs.
 My approach to implementation was as follows:
